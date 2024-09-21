@@ -1,20 +1,21 @@
 import random
 import asyncio
-import requests
+import aiohttp
 
 class Quest:
 	def __init__(self, client):
 		self.client = client
 
 	async def send_message(self, token, channel_id, content):
-		try:
-			res = requests.post(f"https://discord.com/api/v9/channels/{channel_id}/messages", headers = {"Authorization": token}, json = {"content": content}, timeout = 10)
-			if res.status_code != 200:
-				self.client.logger.error(f"Couldn't send message ({res.status_code}) | {token} | {channel_id}")
-		except requests.Timeout:
-			self.client.logger.error(f"Couldn't send message (Timeout)")
-		except requests.ConnectionError:
-			self.client.logger.error(f"Couldn't send message (ConnectionError)")
+		async with aiohttp.ClientSession() as session:
+			try:
+				async with session.post(f"https://discord.com/api/v9/channels/{channel_id}/messages", headers = {"Authorization": token}, json = {"content": content}, timeout = 10) as res:
+					if res.status_code != 200:
+						self.client.logger.error(f"Couldn't send message ({res.status_code}) | {token} | {channel_id}")
+			except asyncio.TimeoutError:
+				self.client.logger.error(f"Couldn't send message (TimeoutError)")
+			except aiohttp.ClientConnectionError:
+				self.client.logger.error(f"Couldn't send message (ClientConnectionError)")
 
 	async def action_someone(self):
 		if self.client.data.available.selfbot:
