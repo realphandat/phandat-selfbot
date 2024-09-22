@@ -10,7 +10,7 @@ class Quest:
 		async with aiohttp.ClientSession() as session:
 			try:
 				async with session.post(f"https://discord.com/api/v9/channels/{channel_id}/messages", headers = {"Authorization": token}, json = {"content": content}, timeout = 10) as res:
-					if res.status_code != 200:
+					if res.status != 200:
 						self.client.logger.error(f"Couldn't send message ({res.status_code}) | {token} | {channel_id}")
 			except asyncio.TimeoutError:
 				self.client.logger.error(f"Couldn't send message (TimeoutError)")
