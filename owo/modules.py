@@ -187,15 +187,29 @@ class Modules:
 					self.client.logger.info(f"{self.client.data.discord.quest[0]} ({self.client.data.discord.quest[1]})")
 					if re.findall(r"Say 'owo' [0-9]+ times!", self.client.data.discord.quest[0]):
 						self.client.data.quest.owo = True
+						if self.client.data.config.quest['safe']:
+							self.client.data.quest.hunt = True
+							self.client.data.quest.battle = True
 					elif re.findall(r"[0-9]+ xp from hunting and battling!", self.client.data.discord.quest[0]):
 						self.client.data.quest.hunt = True
 						self.client.data.quest.battle = True
-					elif re.findall(r"Manually hunt [0-9]+ times!", self.client.data.discord.quest[0]):
-						self.client.data.quest.hunt = True
+						if self.client.data.config.quest['safe']:
+							self.client.data.quest.owo = True
 					elif re.findall(r"Hunt [0-9]+ animals that are (.*?) rank!", self.client.data.discord.quest[0]):
 						self.client.data.quest.hunt = True
+						if self.client.data.config.quest['safe']:
+							self.client.data.quest.owo = True
+							self.client.data.quest.battle = True
+					elif re.findall(r"Manually hunt [0-9]+ times!", self.client.data.discord.quest[0]):
+						self.client.data.quest.hunt = True
+						if self.client.data.config.quest['safe']:
+							self.client.data.quest.owo = True
+							self.client.data.quest.battle = True
 					elif re.findall(r"Battle [0-9]+ times!", self.client.data.discord.quest[0]):
 						self.client.data.quest.battle = True
+						if self.client.data.config.quest['safe']:
+							self.client.data.quest.owo = True
+							self.client.data.quest.hunt = True
 					elif re.findall(r"Gamble [0-9]+ times!", self.client.data.discord.quest[0]):
 						self.client.data.quest.gamble = True
 					elif re.findall(r"Use an action command on someone [0-9]+ times!", self.client.data.discord.quest[0]):
@@ -293,8 +307,8 @@ class Modules:
 			except asyncio.TimeoutError:
 				self.client.logger.error(f"Couldn't get daily message")
 
-	async def sleep(self):
-		if self.client.data.available.selfbot and self.client.data.selfbot.work_time - time.time() <= 0:
+	async def sleep(self, skip = False):
+		if self.client.data.available.selfbot and ((self.client.data.selfbot.work_time - time.time() <= 0) or skip):
 			sleep = random.randint(300, 600)
 			self.client.logger.info(f"Sleep for {sleep} Seconds")
 			await self.client.webhooks.send(
@@ -663,7 +677,7 @@ class Modules:
 					self.client.data.available.selfbot = True
 					self.client.data.checking.captcha_attempts = 0
 					if self.client.data.config.image_captcha['sleep_after_solve']:
-						await self.sleep()
+						await self.sleep(True)
 				elif "🚫" in captcha_verification.content:
 					self.client.logger.info(f"Solved Image Captcha failed")
 					await self.client.webhooks.send(
@@ -819,7 +833,7 @@ class Modules:
 							self.client.data.available.selfbot = True
 							self.client.data.checking.captcha_attempts = 0
 							if self.client.data.config.hcaptcha['sleep_after_solve']:
-								await self.sleep()
+								await self.sleep(True)
 						else:
 							self.client.logger.info(f"Solved HCaptcha failed")
 							await self.client.webhooks.send(
