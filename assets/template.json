@@ -33,6 +33,7 @@
 
 		"quest": {
 			"mode": true,
+			"safe": true,
 			"channel_id": []
 		},
 
