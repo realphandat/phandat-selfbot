@@ -275,6 +275,9 @@ class OwOManager:
 		select = inquirer.list_input("Move ↑↓ and ENTER to select", choices = self.mode)
 		config[token]['quest']['mode'] = select == "Yes"
 		if config[token]['quest']['mode']:
+			print(f"[!] Do quest safely (Recent: {config[token]['quest']['safe']})")
+			select = inquirer.list_input("Move ↑↓ and ENTER to select", choices = self.mode)
+			config[token]['quest']['safe'] = select == "Yes"
 			while True:
 				try:
 					amount = int(input(f"[!] Enter the amount of quest channel id (E.g: 3) (Recent: {config[token]['quest']['channel_id']}): ")) + 1
