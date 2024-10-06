@@ -10,5 +10,6 @@
   <p>Youtube Tutorial: https://youtu.be/DgA7Fml79MI</p>
   <p>Google Document: https://docs.google.com/document/d/1T58mo4kYlC6fXrbmtgAB_rwWWWT1iUMniajOBhHc6pA/edit</p>
   <p>Bot-Hosting 24/7: https://bot-hosting.net/?aff=1191703681637290086</p>
+    <p>Youtube Bot-Hosting 24/7: https://youtu.be/GhZN18De0ls</p>
 
 </div>
