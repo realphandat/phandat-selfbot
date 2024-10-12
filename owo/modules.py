@@ -327,6 +327,7 @@ class Modules:
 					description = f"**{self.client.data.emoji.arrow}Work for __{work}__ seconds**",
 					color = discord.Colour.random()
 				)
+				self.client.data.available.captcha = False
 				self.client.data.available.selfbot = True
 				self.client.data.stat.sleep += 1
 
