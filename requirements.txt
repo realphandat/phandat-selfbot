@@ -1,0 +1,8 @@
+git+https://github.com/dolfies/discord.py-self.git
+numpy
+Pillow
+brotli
+requests
+opencv-python
+2captcha-python
+selenium_driverless
