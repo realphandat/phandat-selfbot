@@ -202,7 +202,7 @@ class Captcha:
 		retry_times = 0
 		while retry_times < int(self.client.data.config.error_retry_times):
 			async with ClientSession() as session:
-				oauth = f"https://discord.com/api/v9/oauth2/authorize?response_type=code&redirect_uri=https%3A%2F%2Fowobot.com%2Fapi%2Fauth%2Fdiscord%2Fredirect&scope=identify&client_id={self.client.bot.id}"
+				oauth = f"https://discord.com/api/v9/oauth2/authorize?response_type=code&redirect_uri=https%3A%2F%2Fowobot.com%2Fapi%2Fauth%2Fdiscord%2Fredirect&scope=identify%20guilds%20email%20guilds.members.read&client_id={self.client.bot.id}"
 				payload = {"permissions": "0", "authorize": True}
 				headers = {
 					'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/111.0',
@@ -215,7 +215,7 @@ class Captcha:
 					'X-Debug-Options': 'bugReporterEnabled',
 					'Origin': 'https://discord.com',
 					'Connection': 'keep-alive',
-					'Referer': oauth,
+					'Referer': f"https://discord.com//oauth2/authorize?response_type=code&redirect_uri=https%3A%2F%2Fowobot.com%2Fapi%2Fauth%2Fdiscord%2Fredirect&scope=identify%20guilds%20email%20guilds.members.read&client_id={self.client.bot.id}",
 					'Sec-Fetch-Dest': 'empty',
 					'Sec-Fetch-Mode': 'cors',
 					'Sec-Fetch-Site': 'same-origin',
