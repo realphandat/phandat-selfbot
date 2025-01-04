@@ -52,12 +52,12 @@ class Command:
 			if command[0].lower() == "star_gem" and len(command) >= 2:
 				await self.change_star_gem_mode(command)
 
-			if command[0].lower() == "animals_mode" and len(command) >= 2:
-				await self.change_animals_mode(command)
-			if command[0].lower() == "animals_type" and len(command) >= 2:
-				await self.change_animals_type(command)
-			if command[0].lower() == "animals_rank" and len(command) >= 2:
-				await self.change_animals_rank(command)
+			if command[0].lower() == "animal_mode" and len(command) >= 2:
+				await self.change_animal_mode(command)
+			if command[0].lower() == "animal_type" and len(command) >= 2:
+				await self.change_animal_type(command)
+			if command[0].lower() == "animal_rank" and len(command) >= 2:
+				await self.change_animal_rank(command)
 
 	async def help(self):
 		menu = """
@@ -79,9 +79,9 @@ class Command:
 `sort_gem` + `min/max`
 `star_gem` + `on/off`
 
-`animals_mode` + `on/off`
-`animals_type` + `type`
-`animals_rank` + `rank`**
+`animal_mode` + `on/off`
+`animal_type` + `type`
+`animal_rank` + `rank`**
 """
 		self.client.logger.info(menu)
 		await self.client.webhook.send(
@@ -255,31 +255,31 @@ class Command:
 				color = discord.Colour.random()
 			)
 
-	async def change_animals_mode(self, command):
+	async def change_animal_mode(self, command):
 		if command[1].lower() == "on" or command[1].lower() == "off":
 			setting = command[1].lower() == "on"
 			self.client.data.config.sell_sac_animal['mode'] = setting
-			self.client.logger.info(f"Animals mode: {command[1].lower()}")
+			self.client.logger.info(f"animal mode: {command[1].lower()}")
 			await self.client.webhook.send(
 				title = f"🛸 CHANGED CONFIG 🛸",
-				description = f"**{self.client.data.config.emoji['arrow']}Animals mode: {command[1].lower()}**",
+				description = f"**{self.client.data.config.emoji['arrow']}animal mode: {command[1].lower()}**",
 				color = discord.Colour.random()
 			)
 
-	async def change_animals_type(self, command):
+	async def change_animal_type(self, command):
 		self.client.data.config.sell_sac_animal['type'] = command[1].lower()
-		self.client.logger.info(f"Animals type: {command[1].lower()}")
+		self.client.logger.info(f"animal type: {command[1].lower()}")
 		await self.client.webhook.send(
 			title = f"🛸 CHANGED CONFIG 🛸",
-			description = f"**{self.client.data.config.emoji['arrow']}Animals type: {command[1].lower()}**",
+			description = f"**{self.client.data.config.emoji['arrow']}animal type: {command[1].lower()}**",
 			color = discord.Colour.random()
 		)
 
-	async def change_animals_rank(self, command):
+	async def change_animal_rank(self, command):
 		self.client.data.config.sell_sac_animal['rank'] = command[1].lower()
-		self.client.logger.info(f"Animals rank: {command[1].lower()}")
+		self.client.logger.info(f"animal rank: {command[1].lower()}")
 		await self.client.webhook.send(
 			title = f"🛸 CHANGED CONFIG 🛸",
-			description = f"**{self.client.data.config.emoji['arrow']}Animals rank: {command[1].lower()}**",
+			description = f"**{self.client.data.config.emoji['arrow']}animal rank: {command[1].lower()}**",
 			color = discord.Colour.random()
 		)

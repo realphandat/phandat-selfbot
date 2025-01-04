@@ -93,11 +93,11 @@ class Gem:
 					elif len(glitch_end) == 3:
 						glitch_end = int(int(glitch_end[0]) * 3600 + int(glitch_end[1]) * 60 + int(glitch_end[2]))
 					self.client.data.cooldown.glitch = glitch_end + time.time()
-					self.client.logger.info(f"Distorted animals are available ({datetime.timedelta(seconds = glitch_end)})")
+					self.client.logger.info(f"Glitch is available ({datetime.timedelta(seconds = glitch_end)})")
 				elif "not available" in glitch_message.content:
-					self.client.logger.info(f"Distorted animals aren't available")
+					self.client.logger.info(f"Glitch isn't available")
 			except asyncio.TimeoutError:
-				self.client.logger.error(f"Couldn't get distorted animals message")
+				self.client.logger.error(f"Couldn't get glitch message")
 
 	def glitch_available(self):
-		return self.client.data.config.glitch and not (self.client.data.cooldown.glitch - time.time() <= 0) and self.client.data.current_task_loop.check_glitch > 0
+		return self.client.data.config.use_gem['use_gem_when_glitch_available'] and not (self.client.data.cooldown.glitch - time.time() <= 0) and self.client.data.current_task_loop.check_glitch > 0
