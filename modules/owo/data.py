@@ -24,7 +24,6 @@ class Config:
 			data = json.load(file)
 			self.token = token
 			self.error_retry_times = data[token]['error_retry_times']
-			self.owo_id = data[token]['owo_id']
 			self.emoji = data[token]['emoji']
 			self.notification = data[token]['notification']
 			self.history = data[token]['history']

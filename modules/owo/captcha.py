@@ -292,7 +292,7 @@ class Captcha:
 			if result_session:
 				async with result_session as session:
 					cookies = {cookie.key: cookie.value for cookie in session.cookie_jar}
-					async with session.post(str(self.client.data.config.captcha['solve_hcaptcha']['url']), headers=headers, json={"token": result['code']}, cookies=cookies) as res:
+					async with session.post("https://owobot.com/api/captcha/verify", headers=headers, json={"token": result['code']}, cookies=cookies) as res:
 						if res.status == 200:
 							self.client.logger.info(f"Solved HCaptcha successfully")
 							await self.client.webhook.send(
