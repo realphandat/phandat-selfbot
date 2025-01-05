@@ -1,8 +1,6 @@
 {
 	"token": {
 		"error_retry_times": 3,
-
-		"owo_id": 408785106942164992,
 		
 		"emoji": {
 			"arrow": "<a:Arrow:1065047400714088479>"
@@ -55,8 +53,7 @@
 				"mode": true,
 				"attempt": 3,
 				"sleep_after_solve": true,
-				"twocaptcha": ["abc123"],
-				"url": "https://owobot.com/api/captcha/verify"
+				"twocaptcha": ["abc123"]
 			},
 			"pause_if_twocaptcha_balance_is_low": {
 				"mode": true,
