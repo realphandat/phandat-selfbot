@@ -323,7 +323,7 @@ class Captcha:
 								await self.client.notification.notify()
 
 	async def check_twocaptcha_balance(self, twocaptcha_api_keys):
-		if self.client.data.available.selfbot and self.client.data.config.captcha['solve_image_captcha']['mode']:
+		if self.client.data.available.selfbot and self.client.data.config.captcha['solve_image_captcha']['mode'] and not self.client.data.available.captcha:
 			for api_key in twocaptcha_api_keys:
 				twocaptcha = TwoCaptcha(
 					server="2captcha.com",
